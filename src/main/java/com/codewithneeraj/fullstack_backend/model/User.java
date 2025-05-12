@@ -52,8 +52,10 @@
 
 package com.codewithneeraj.fullstack_backend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 public class User {
@@ -64,10 +66,15 @@ public class User {
 
     private String username;
     private String name;
+    @Column(unique = true)
     private String email;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Vehicle> vehicles;
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//    private List<Vehicle> vehicles;
+@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+@JsonManagedReference
+private List<Vehicle> vehicles;
+
 
     // Getters & Setters
 
